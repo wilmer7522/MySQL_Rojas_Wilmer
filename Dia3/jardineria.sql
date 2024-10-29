@@ -958,7 +958,7 @@ select ciudad,telefono from oficina where pais = 'España'; -- Devuelve un lista
 select nombre,apellido1,apellido2,email from empleado where codigo_jefe = 7; -- Devuelve un listado con el nombre, apellidos y email de los empleados cuyo jefe tiene un código de jefe igual a 7.
 select puesto,nombre,apellido1,apellido2,email from empleado where codigo_jefe; -- Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la empresa.
 select nombre,apellido1, apellido2,puesto from empleado where puesto != 'Representante Ventas'; -- Devuelve un listado con el nombre, apellidos y puesto de aquellos empleados que no sean representantes de ventas.
-select nombre_cliente from cliente where pais = 'España'; -- Devuelve un listado con el nombre de los todos los clientes españoles.
+select nombre_cliente from cliente where pais = 'Spain'; -- Devuelve un listado con el nombre de los todos los clientes españoles.
 select distinct estado from pedido; -- Devuelve un listado con los distintos estados por los que puede pasar un pedido.
 
 
@@ -976,5 +976,18 @@ select codigo_pedido,codigo_cliente,fecha_esperada,fecha_entrega from pedido whe
 select codigo_pedido,codigo_cliente,fecha_esperada,fecha_entrega from pedido where fecha_entrega <= adddate(fecha_esperada, -2); -- Utilizando la función ADDDATE de MySQL.
 select codigo_pedido,codigo_cliente,fecha_esperada,fecha_entrega from pedido where datediff(fecha_esperada, fecha_entrega) >= 2; -- Utilizando la función DATEDIFF de MySQL.
 select codigo_pedido,codigo_cliente,fecha_esperada,fecha_entrega from pedido where fecha_entrega <= fecha_esperada - interval 2 day; -- utilizando operador de resta
- 
--- 
+
+
+select fecha_pedido from pedido where year(fecha_pedido) = 2009; -- Devuelve un listado de todos los pedidos que fueron en 2009.
+
+select fecha_pedido from pedido where month(fecha_pedido) = 01; -- Devuelve un listado de todos los pedidos que han sido  en el mes de enero de cualquier año.
+
+select fecha_pago from pago where forma_pago = 'PayPal' order by total desc; -- Devuelve un listado con todos los pagos que se realizaron en el año 2008 mediante Paypal. Ordene el resultado de mayor a menor.
+
+select distinct forma_pago from pago;-- Devuelve un listado con todas las formas de pago que aparecen en la tabla pago. Tenga en cuenta que no deben aparecer formas de pago repetidas.
+
+select nombre from producto where gama = 'Ornamentales' and cantidad_en_stock >= 100  order by precio_venta desc;
+-- Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio.
+
+select ciudad,codigo_empleado_rep_ventas from cliente where  ciudad = 'Madrid' and codigo_empleado_rep_ventas = 11 or codigo_empleado_rep_ventas = 30;
+-- Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30.
