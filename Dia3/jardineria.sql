@@ -43,7 +43,7 @@ fax varchar(15) not null,
 linea_direccion1 varchar(50) not null,
 linea_direccion2 varchar(50),
 ciudad varchar(50) not null,
-region varchar(50) not null,
+region varchar(50),
 pais varchar(50) not null,
 codigo_postal varchar(10) not null,
 codigo_empleado_rep_ventas int not null,
@@ -77,7 +77,7 @@ CREATE TABLE gama_producto(
 gama varchar(50) not null primary key,
 descripcion_texto text not null,
 descripcion_html text,
-imagen varchar(256) not null
+imagen varchar(256)
 );
 
 
@@ -978,7 +978,7 @@ select distinct forma_pago from pago;-- Devuelve un listado con todas las formas
 select nombre from producto where gama = 'Ornamentales' and cantidad_en_stock >= 100  order by precio_venta desc;
 -- Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock. El listado deberá estar ordenado por su precio de venta, mostrando en primer lugar los de mayor precio.
 
-select ciudad,codigo_empleado_rep_ventas from cliente where  ciudad = 'Madrid' and codigo_empleado_rep_ventas = 11 or codigo_empleado_rep_ventas = 30;
+select ciudad,codigo_empleado_rep_ventas from cliente where  ciudad = 'Madrid' and (codigo_empleado_rep_ventas = 11 or codigo_empleado_rep_ventas = 30);
 -- Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30.
 
 select nombre_cliente,nombre,apellido1 from cliente join empleado on cliente.codigo_cliente = empleado.codigo_empleado;
