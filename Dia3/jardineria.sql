@@ -27,11 +27,10 @@ foreign key (codigo_oficina) REFERENCES oficina (codigo_oficina),
 foreign key (codigo_jefe) references empleado (codigo_empleado)
 );
 
-ALTER TABLE empleado
-MODIFY codigo_jefe int NULL;
 
 
-drop table empleado;
+
+
 
 
 CREATE TABLE cliente(
@@ -51,9 +50,7 @@ codigo_empleado_rep_ventas int not null,
 limite_credito decimal(15,2) not null,
 FOREIGN KEY (codigo_empleado_rep_ventas) REFERENCES empleado (codigo_empleado)
 );
-drop table cliente;
-ALTER TABLE cliente
-MODIFY region varchar(50) NULL;
+
 
 CREATE TABLE pago(
 codigo_cliente int not null,
@@ -63,7 +60,6 @@ fecha_pago date not null,
 total decimal(15,2) not null,
 foreign key (codigo_cliente) REFERENCES cliente (codigo_cliente)
 );
-drop table pago;
 
 CREATE TABLE pedido(
 codigo_pedido int not null primary key,
@@ -75,10 +71,7 @@ comentarios text,
 codigo_cliente int not null,
 foreign key (codigo_cliente) REFERENCES cliente (codigo_cliente)
 );
-drop table pedido;
 
-ALTER TABLE pedido
-MODIFY fecha_entrega date NULL;
 
 CREATE TABLE gama_producto(
 gama varchar(50) not null primary key,
@@ -87,11 +80,7 @@ descripcion_html text,
 imagen varchar(256) not null
 );
 
-ALTER TABLE gama_producto
-MODIFY descripcion_html text NULL;
 
-ALTER TABLE gama_producto
-MODIFY imagen varchar(256) NULL;
 
 CREATE TABLE producto(
 codigo_producto varchar(15) not null primary key,
@@ -116,7 +105,7 @@ primary key (codigo_pedido,codigo_producto),
 foreign key (codigo_pedido) references pedido (codigo_pedido),
 foreign key (codigo_producto) references producto (codigo_producto)
 );
-drop table detalle_pedido;
+
 
 
 
@@ -991,3 +980,5 @@ select nombre from producto where gama = 'Ornamentales' and cantidad_en_stock >=
 
 select ciudad,codigo_empleado_rep_ventas from cliente where  ciudad = 'Madrid' and codigo_empleado_rep_ventas = 11 or codigo_empleado_rep_ventas = 30;
 -- Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30.
+
+select nombre_cliente,nombre,apellido1 from cliente join empleado on cliente.codigo_cliente = empleado.codigo_empleado;
